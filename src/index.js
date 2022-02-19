@@ -2,10 +2,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { showMessage } from './js/notification';
 import refs from './js/refs';
+import { saveToLS, getFromLS } from './js/helpers';
+import { renderMarkup } from './js/renderMarkup';
 
 import './sass/main.scss';
 
 const { todoWrapperRef, todoInputRef, todoBtnRef, todoListRef } = refs;
+let arrOfTodo = [];
+
+render();
 
 todoBtnRef.addEventListener('click', onCreateMagic);
 window.addEventListener('keydown', onPressKey);
@@ -14,42 +19,41 @@ todoListRef.addEventListener('click', event => {
 
   if (currentBtn) {
     const id = event.target.parentNode.id;
-    console.dir(id);
+
+    const filteredTodos = arrOfTodo.filter(todo => todo.id !== id);
+
+    renderMarkup(todoListRef, filteredTodos);
+    saveToLS('todos', filteredTodos);
+    render();
   }
 });
 
-let arrOfTodo = [];
+function render() {
+  const parsedTodos = getFromLS('todos');
+
+  if (parsedTodos) {
+    arrOfTodo = parsedTodos ? parsedTodos : [];
+  }
+
+  renderMarkup(todoListRef, arrOfTodo);
+}
 
 function onCreateMagic() {
   todoListRef.innerHTML = '';
 
   const inputText = todoInputRef.value.trim();
 
-  if (!inputText) {
-    showMessage('error', 'Your input empty!');
+  if (!inputText) return showMessage('error', 'Your input empty!');
 
-    return;
-  }
+  arrOfTodo.push({ id: uuidv4(), description: `${inputText}`, status: false });
 
-  if (inputText) {
-    arrOfTodo.push({ id: uuidv4(), description: `${inputText}`, status: false });
-    showMessage();
+  showMessage();
+  saveToLS('todos', arrOfTodo);
 
-    const render = arrOfTodo.map(renderMarkup).join('');
-    todoListRef.innerHTML += render;
-  }
+  renderMarkup(todoListRef, arrOfTodo);
+  // render();
+
   todoInputRef.value = '';
-  console.table(arrOfTodo);
-}
-
-function renderMarkup({ id, description, status }) {
-  return `
-
-    <li class="todo__list-item" id="${id}">
-    <p class="todo__list-text"> ${description}</p>
-    <input type="checkbox" data-status="${status}" class="todo__list-checkbox">
-    <button type="button" class="todo__list-btn" data-action="delete">Удалить</button>
-</li> `;
 }
 
 function onPressKey(event) {
