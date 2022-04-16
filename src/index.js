@@ -1,63 +1,41 @@
-import { v4 as uuidv4 } from 'uuid';
-
-import { showMessage } from './js/notification';
-import refs from './js/refs';
-import { saveToLS, getFromLS } from './js/helpers';
-import { renderMarkup } from './js/renderMarkup';
-
+import 'material-icons/iconfont/material-icons.css';
 import './sass/main.scss';
 
-const { todoWrapperRef, todoInputRef, todoBtnRef, todoListRef } = refs;
-let arrOfTodo = [];
+import { showToast } from './js/notification';
+import { ImageService } from './js/api-service';
+import { getRefs } from './js/getRefs';
+import { renderGallery } from './js/renderGallery';
 
-render();
+const { galleryContainer, loadMoreBtn, searchBar } = getRefs();
 
-todoBtnRef.addEventListener('click', onCreateMagic);
-window.addEventListener('keydown', onPressKey);
-todoListRef.addEventListener('click', event => {
-  const currentBtn = event.target.dataset.action;
-
-  if (currentBtn) {
-    const id = event.target.parentNode.id;
-
-    const filteredTodos = arrOfTodo.filter(todo => todo.id !== id);
-
-    renderMarkup(todoListRef, filteredTodos);
-    saveToLS('todos', filteredTodos);
-    render();
-  }
+searchBar.addEventListener('submit', onSearchSubmit);
+loadMoreBtn.addEventListener('click', () => {
+  ImageService.getImages().then(res => {
+    renderGallery(res.data.photos);
+  });
 });
 
-function render() {
-  const parsedTodos = getFromLS('todos');
+function onSearchSubmit(event) {
+  event.preventDefault();
 
-  if (parsedTodos) {
-    arrOfTodo = parsedTodos ? parsedTodos : [];
-  }
+  galleryContainer.innerHTML = '';
+  ImageService.resetPage();
 
-  renderMarkup(todoListRef, arrOfTodo);
-}
+  ImageService.query = event.target.elements.query.value.trim();
 
-function onCreateMagic() {
-  todoListRef.innerHTML = '';
+  if (!ImageService.query) return showToast('error', 'Please enter a search query');
 
-  const inputText = todoInputRef.value.trim();
+  ImageService.getImages()
+    .then(res => {
+      console.log(res.data);
+      renderGallery(res.data.photos);
 
-  if (!inputText) return showMessage('error', 'Your input empty!');
+      showToast('success', 'Success');
+    })
+    .catch(err => {
+      showToast('error', err.message);
+      console.error(err);
+    });
 
-  arrOfTodo.push({ id: uuidv4(), description: `${inputText}`, status: false });
-
-  showMessage();
-  saveToLS('todos', arrOfTodo);
-
-  renderMarkup(todoListRef, arrOfTodo);
-  // render();
-
-  todoInputRef.value = '';
-}
-
-function onPressKey(event) {
-  if (event.key === 'Enter') {
-    onCreateMagic();
-  }
+  searchBar.reset();
 }

@@ -1,11 +1,20 @@
 import Swal from 'sweetalert2';
 
-export const showMessage = (icon = 'success', title = 'Your todo added!') => {
-  Swal.fire({
-    position: 'top-end',
-    icon: icon,
-    title: title,
+export const showToast = (icon, title) => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
     showConfirmButton: false,
-    timer: 1500,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: toast => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon,
+    title,
   });
 };
