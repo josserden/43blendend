@@ -7,6 +7,7 @@ axios.defaults.headers.common['Authorization'] = API_KEY;
 export const ImageService = {
   _query: '',
   page: 1,
+  perPage: 15,
 
   incrementPage() {
     this.page += 1;
@@ -18,11 +19,18 @@ export const ImageService = {
 
   getImages() {
     return axios
-      .get(`/search?query=${this._query}&page=${this.page}&per_page=15&orientation=landscape`)
+      .get(
+        `/search?query=${this._query}&page=${this.page}&per_page=${this.perPage}&orientation=landscape`,
+      )
       .then(response => {
         this.incrementPage();
 
-        return response;
+        const { photos, total_results } = response.data;
+
+        return {
+          photos,
+          isOver: total_results >= this.page * this.perPage,
+        };
       });
   },
 
