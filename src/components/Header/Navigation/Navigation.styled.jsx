@@ -13,4 +13,9 @@ export const NavLink = styled.a`
   font-size: ${props => props.theme.fontSizes.small};
   line-height: 16px;
   letter-spacing: 0.02em;
+
+  :hover,
+  :focus {
+    color: ${props => props.theme.colors.accent};
+  }
 `;
