@@ -1,11 +1,11 @@
-import { Header } from '../Header/Header';
+import * as Header from '../Header/Header';
 
 export const App = () => {
   return (
     <>
       {/* Header */}
 
-      <Header />
+      <Header.Header />
 
       {/* Hero */}
       {/* Features */}

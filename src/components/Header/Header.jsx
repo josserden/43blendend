@@ -1,6 +1,6 @@
-import { Logo } from './Logo/Logo';
-import { Navigation } from './Navigation/Navigation';
-import { Contacts } from './Contacts/Contacts';
+import { Logo } from '../Logo/Logo';
+import { Navigation } from '../Navigation/Navigation';
+import { Contacts } from '../Contacts/Contacts';
 import { Container } from '../App/App.styled';
 import { HeaderNav, HeaderWrapper } from './Header.styled';
 
