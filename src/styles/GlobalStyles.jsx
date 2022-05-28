@@ -14,6 +14,10 @@ export const GlobalStyles = css`
       'Helvetica Neue', sans-serif;
     background-color: ${theme.colors.light};
     min-height: 100vh;
+<<<<<<< HEAD
+=======
+    font-style: normal;
+>>>>>>> main
   }
 
   h1,
