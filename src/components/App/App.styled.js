@@ -39,7 +39,6 @@ export const Heading = styled.h2`
   font-weight: 700;
 
   text-align: ${({ textAlign }) => (!textAlign ? 'left' : textAlign)};
-
   margin-bottom: 20px;
 
   @media (min-width: ${props => props.theme.breakpoints.s}) {
