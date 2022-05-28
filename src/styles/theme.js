@@ -1,13 +1,13 @@
 export const theme = Object.freeze({
   colors: {
-    primary: '#49a09d',
+    accent: '#2196F3',
     white: '#ffffff',
     gray: '#9e9e9e',
     light: '#f2f2f2',
     dark: '#212121',
   },
   fontSizes: {
-    small: '16px',
+    small: '14px',
     medium: '18px',
     large: '22px',
     xl: '30px',

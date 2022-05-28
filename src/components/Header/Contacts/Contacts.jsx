@@ -1,12 +1,22 @@
+import { ContactLink, ContactsList } from './Contacts.styled';
+import { AiOutlineMail } from 'react-icons/ai';
+import { MdPhoneAndroid } from 'react-icons/md';
+
 export const Contacts = ({ place }) => {
   return (
-    <ul>
+    <ContactsList>
       <li>
-        <a href="mailto:">мыло</a>
+        <ContactLink href="mailto:">
+          <AiOutlineMail size="14px" />
+          info@devstudio.com
+        </ContactLink>
       </li>
       <li>
-        <a href="tel:">телефон</a>
+        <ContactLink href="tel:">
+          <MdPhoneAndroid />
+          +38 096 111 11 11
+        </ContactLink>
       </li>
-    </ul>
+    </ContactsList>
   );
 };

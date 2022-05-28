@@ -1,9 +1,11 @@
+import { Nav, NavLink } from './Navigation.styled';
+
 export const Navigation = () => {
   return (
-    <nav>
-      <a href="">Домой</a>
-      <a href="">Портфолио</a>
-      <a href="">Ктонтакты</a>
-    </nav>
+    <Nav>
+      <NavLink href="">Домой</NavLink>
+      <NavLink href="">Портфолио</NavLink>
+      <NavLink href="">Ктонтакты</NavLink>
+    </Nav>
   );
 };

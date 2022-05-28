@@ -1,7 +1,9 @@
-export const Logo = ({ style }) => {
+import { Link, Studio } from './Logo.styled';
+
+export const Logo = ({ place }) => {
   return (
-    <a href="/">
-      Web<span>Studio</span>
-    </a>
+    <Link href="/">
+      Web<Studio place={place}>Studio</Studio>
+    </Link>
   );
 };
