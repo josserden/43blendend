@@ -2,10 +2,11 @@ import styled from '@emotion/styled';
 
 export const ContactsList = styled.ul`
   display: flex;
-  gap: 50px;
-  align-items: center;
+  gap: ${props => (props.place === 'header' ? '50px' : '8px')};
+  align-items: ${props => (props.place === 'header' ? 'center' : 'start')};
   justify-content: center;
   margin-left: auto;
+  flex-direction: ${props => (props.place === 'header' ? 'row' : 'column')};
 `;
 
 export const ContactLink = styled.a`
