@@ -26,7 +26,7 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.tr`
-  &:nth-child(odd) {
+  &:nth-of-type(odd) {
     background-color: ${({ theme }) => theme.colors.light};
   }
 `;
