@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 import * as ImageService from 'service/image-service';
 import {
@@ -17,24 +18,26 @@ export class Gallery extends Component {
   };
 
   async componentDidMount() {
-    const images = await ImageService.getImages(this.state.query);
+    const { query } = this.state;
+    const images = await ImageService.getImages(query);
     this.setState({ images });
 
-    console.log(images);
+    document.title = `Gallery - ${query}`;
   }
 
   render() {
-    const { images } = this.state;
+    const { images, query } = this.state;
+
     return (
       <Section>
         <Container>
-          <Heading textAlign="center">Search for images of cats</Heading>
+          <Heading textAlign="center">Search for images of {query}</Heading>
           <Text textAlign="center">{images.length} images found</Text>
 
           <Grid>
-            {images.map(image => (
-              <GridItem key={image.id} color={image.avg_color}>
-                <img src={image.src.large} alt={image.alt} />
+            {images.map(({ id, avg_color, alt, src: { large } }) => (
+              <GridItem key={id} color={avg_color}>
+                <img src={large} alt={alt} />
               </GridItem>
             ))}
           </Grid>

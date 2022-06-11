@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BaseTable, THead, Td, Th, Text } from 'components';
+import { BaseTable, THead, Td, Th, Tr, Text } from 'components';
 import { MdDelete } from 'react-icons/md';
 
 const tableHeaders = ['№', 'name', 'age', 'status', 'option'];
@@ -45,7 +45,7 @@ export class Table extends Component {
 
               <tbody>
                 {contacts.map(({ id, name, age, status }, index) => (
-                  <tr key={id}>
+                  <Tr key={id}>
                     <Td>{index + 1}</Td>
                     <Td>{name}</Td>
                     <Td>{age}</Td>
@@ -55,7 +55,7 @@ export class Table extends Component {
                         <MdDelete size="20px" />
                       </button>
                     </Td>
-                  </tr>
+                  </Tr>
                 ))}
               </tbody>
             </BaseTable>

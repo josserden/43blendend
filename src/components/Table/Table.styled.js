@@ -22,5 +22,11 @@ export const Td = styled.td`
 export const Th = styled.th`
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.gray};
-  color: ${({ theme }) => theme.colors.light};
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export const Tr = styled.tr`
+  &:nth-child(odd) {
+    background-color: ${({ theme }) => theme.colors.light};
+  }
 `;
