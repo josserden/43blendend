@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TiDeleteOutline } from 'react-icons/ti';
+// import { TiDeleteOutline } from 'react-icons/ti';
 import { Button } from 'components';
 import * as ImageService from 'service/image-service';
 import {
@@ -19,7 +19,7 @@ export class Gallery extends Component {
   };
 
   componentDidMount() {
-    const { query, page, images } = this.state;
+    const { query, page } = this.state;
     this.getPhotos(query, page);
     document.title = `Gallery - ${query}`;
     console.log(this.state.images);
