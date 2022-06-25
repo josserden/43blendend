@@ -1,2 +1,2 @@
-export * from 'pages/Gallery';
-export * from 'pages/Contacts';
+export * from 'pages/CountrySearch';
+export * from 'pages/Home';
