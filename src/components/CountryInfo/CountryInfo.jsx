@@ -34,7 +34,7 @@ export const CountryInfo = ({
         </CountryDetail>
 
         <CountryDetail>
-          Languages: <Accent>{languages}</Accent>
+          Languages: <Accent>{languages.join(', ')}</Accent>
         </CountryDetail>
       </CountryDescription>
     </CountryWrapper>
