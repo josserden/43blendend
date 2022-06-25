@@ -1,5 +1,4 @@
 import { Container, Section } from 'components';
-import { fetchCountry } from 'service/country-service';
 
 export const Country = () => {
   return (
