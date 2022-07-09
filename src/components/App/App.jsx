@@ -1,6 +1,6 @@
-import {Container, EditForm, Header, SearchForm, Section} from 'components';
-import {useState} from 'react';
-import {TodoList} from '../Todolist/TodoList';
+import { Container, EditForm, Header, SearchForm, Section } from 'components';
+import { useState } from 'react';
+import { TodoList } from '../Todolist/TodoList';
 
 export const App = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -8,14 +8,14 @@ export const App = () => {
 
   const handleEdit = todo => {
     setCurrentTodo(todo);
-    toggleEditing();
+    setIsEditing(true);
   };
 
   const handleCancel = () => {
-    toggleEditing();
+    setIsEditing(false);
   };
 
-  const toggleEditing = () => setIsEditing(state => !state);
+
 
   return (
     <>
@@ -26,7 +26,7 @@ export const App = () => {
             <EditForm
               onCancel={handleCancel}
               currentTodo={currentTodo}
-              onSubmit={toggleEditing}
+              onSubmit={setIsEditing}
             />
           ) : (
             <SearchForm />

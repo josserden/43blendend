@@ -16,7 +16,7 @@ export const EditForm = ({ currentTodo, onCancel, onSubmit }) => {
     e.preventDefault();
     const { id } = currentTodo;
     dispatch(editTodo({ id, text: value }));
-    onSubmit();
+    onSubmit(false);
   };
 
   return (

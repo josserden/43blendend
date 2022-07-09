@@ -11,7 +11,7 @@ export const SearchForm = () => {
   const dispatch = useDispatch();
 
   const handleInput = e => {
-    setQuery(e.currentTarget.value.toLowerCase().trim());
+    setQuery(e.currentTarget.value.toLowerCase());
   };
 
   const handleSubmit = e => {
