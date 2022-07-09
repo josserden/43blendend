@@ -4,7 +4,7 @@ export const Grid = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
-  grid-gap: ${({ theme }) => theme.spacing(5)};
+  grid-gap: ${({ theme }) => theme.spacing(10)};
 `;
 
 export const GridItem = styled.li`
